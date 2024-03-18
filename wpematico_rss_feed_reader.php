@@ -2,11 +2,11 @@
 /**
  * Plugin Name:     WPeMatico RSS Feed Reader
  * Plugin URI:      @todo
- * Description:     WPeMatico Add-on starter point RSS Feed Reader plugin 
- * Version:         1.0.2
+ * Description:     
+ * Version:         1.0
  * Author:          etruel
  * Author URI:      http://www.netmdp.com
- * Text Domain:     rss_feed_reader
+ * Text Domain:     wpematico_rss_feed_reader
  *
  * @package         etruel\RSS Feed Reader
  * @author          Esteban Truelsegaard

@@ -32,7 +32,7 @@ class Wpematico_feed_reader_edit {
 		add_action('wpematico_create_metaboxes_before',  array(__CLASS__, 'wpematico_rss_feed_reader_metaboxes'), 15, 2);
 	}
 	public static function campaign_type_options($options) {
-		$options[] = array('value' => 'rss_reader', 'text' => __('Feed RSS Reader', 'wpematico_reader'), "show" => array('feeds-box', 'rss-page-feed-url-save'), 'hide' => array('images-box'));
+		$options[] = array('value' => 'rss_reader', 'text' => __('RSS Feed Reader', 'wpematico_rss_feed_reader'), "show" => array('feeds-box', 'rss-page-feed-url-save'), 'hide' => array('images-box'));
 
 		return $options;
 	}
@@ -77,9 +77,7 @@ class Wpematico_feed_reader_edit {
 		?>
 			<b><?php _e('How to display the feed content:',  'wperss-page') ?></b><br />
 			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('the_content', $campaign_rss_feed_reader, false); ?> value="the_content" /> <span style="background-color: lightblue; padding-left: 3px; padding-right: 3px;">get_the_content</span> <?php _e('Wordpress filter', 'wperss-page'); ?></label><br />
-			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('page_template', $campaign_rss_feed_reader, false); ?> value="page_template" />
-				<?php _e('RSS Page Template.', 'wperss-page'); ?><br /><?php _e('Must selected also on Page Attributes.', 'wperss-page'); ?></label><br />
-			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('shortcode', $campaign_rss_feed_reader, false); ?> value="shortcode" /> <span style="background-color: lightblue; padding-left: 3px; padding-right: 3px;">[slug-post]</span> <?php _e('Shortcode', 'wperss-page'); ?></label><br/><br>
+			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('shortcode', $campaign_rss_feed_reader, false); ?> value="shortcode" /> <span style="background-color: lightblue; padding-left: 3px; padding-right: 3px;"><?php echo "[$post->post_name]" ?></span> <?php _e('Shortcode', 'wperss-page'); ?></label><br/><br>
 			
 			<label for="campaign_rss_html_content"><b><?php echo __('Template feed', 'wpematico') ?></b></label><br>
 			
