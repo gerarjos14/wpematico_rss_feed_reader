@@ -32,8 +32,6 @@ class wpematico_rss_feed_functions {
 						$post_id = $campaign['ID']; //specify post id here
 						$slug = get_post_field('post_name', $post_id); 
 
-						var_dump($slug);
-						die();
 						add_shortcode($slug, array(__CLASS__, 'wpematico_rss_get_content'));
 						break;
 					default:
