@@ -23,20 +23,24 @@ class wpematico_rss_feed_functions {
 	public static function wpematico_rss_feed_initiation() {
 		$campaigns = WpeMatico::get_campaigns();
 
+
+		
 		foreach ($campaigns as $campaign) {
 			if ($campaign['campaign_type'] == 'rss_reader') {
-				
-				
-				switch ($campaign['campaign_rss_feed_reader']) {
-					case 'shortcode':
-						$post_id = $campaign['ID']; //specify post id here
-						$slug = get_post_field('post_name', $post_id); 
 
-						add_shortcode($slug, array(__CLASS__, 'wpematico_rss_get_content'));
-						break;
-					default:
-						add_action('the_content', array(__CLASS__, 'wpematico_rss_get_content'), 999);
-						break;
+				if (!empty($campaign['campaign_rss_feed_reader'])) {
+					
+					switch ($campaign['campaign_rss_feed_reader']) {
+						case 'shortcode':
+							$post_id = $campaign['ID']; //specify post id here
+							$slug = get_post_field('post_name', $post_id);
+
+							add_shortcode('wpe-' . $slug, array(__CLASS__, 'wpematico_rss_get_content'));
+							break;
+						default:
+							add_action('the_content', array(__CLASS__, 'wpematico_rss_get_content'), 999);
+							break;
+					}
 				}
 			}
 		}
@@ -52,18 +56,19 @@ class wpematico_rss_feed_functions {
 		foreach($campaigns as $campaign){
 			if ($campaign['campaign_type'] == 'rss_reader' ) {
 				$continue = false;
-				if (!empty($campaign['campaign_post_select'])) {
+				if (!empty($campaign['campaign_post_select']) && $post->post_type == 'post') {
 					$continue = ($campaign['campaign_post_select'] == $post->ID);
-				} elseif (!empty($campaign['campaign_page_select'])) {
+				} elseif (!empty($campaign['campaign_page_select']) && $post->post_type == 'page') {
 					$continue = ($campaign['campaign_page_select'] == $post->ID);
 				}
-				
 				$campaign_id = $campaign['ID'];
 
 				if($continue){
+
 					if($campaign_id){
 						$content = get_post_meta($campaign_id, 'feed_items');
 						$content = implode('', $content);
+
 					}
 				}else{
 					if(isset($campaign['campaign_rss_feed_reader']) && $campaign['campaign_rss_feed_reader'] == 'shortcode'){

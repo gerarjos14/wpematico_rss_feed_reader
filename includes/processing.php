@@ -17,7 +17,9 @@ class Wpematico_feed_reader_process {
 	}
 
 	public static function rss_feed_reader_process($simplepie, $class, $feed, $kf){
+		
 		if ($class->campaign['campaign_type'] == 'rss_reader') {
+
 			$wpe_url_feed = apply_filters('wpematico_simplepie_url', $feed, $kf, $class->campaign);
 			/**
 			 * @since 1.0.0
@@ -33,7 +35,7 @@ class Wpematico_feed_reader_process {
 			$fetch_feed_params = apply_filters('wpematico_fetch_feed_params', $fetch_feed_params, $kf, $class->campaign);
 			$simplepie = WPeMatico::fetchFeed($fetch_feed_params);
 		}
-
+		
 		return $simplepie;
 	}
 
@@ -50,6 +52,8 @@ class Wpematico_feed_reader_process {
 				return false;
 			}
 		}
+		die();
+
 		return true;
 	}
 
@@ -57,6 +61,7 @@ class Wpematico_feed_reader_process {
 
 		$campaign_id = $campaign['ID'];
 		if($campaign_id){
+
 			//start the process to change the template to a feed
 			$template = str_replace('~~~BeginItemsRecord~~~', '', $template);
 			$template = str_replace('~~~ItemAuthor~~~', $item['author'], $template);
@@ -68,6 +73,8 @@ class Wpematico_feed_reader_process {
 			$template = str_replace('~~~ItemSourceUrl~~~', $item['meta']['wpe_sourcepermalink'], $template);
 			$template = str_replace('~~~EndItemsRecord~~~', '', $template);
 			//finish the process
+			
+			
 			
 			//save data for the $campaign_id
 			return add_post_meta($campaign_id, 'feed_items', $template);

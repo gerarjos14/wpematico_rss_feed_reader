@@ -78,8 +78,9 @@ class Wpematico_feed_reader_edit {
 		?>
 			<b><?php _e('How to display the feed content:',  'wperss-page') ?></b><br />
 			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('the_content', $campaign_rss_feed_reader, false); ?> value="the_content" /> <span style="background-color: lightblue; padding-left: 3px; padding-right: 3px;">get_the_content</span> <?php _e('Wordpress filter', 'wperss-page'); ?></label><br />
-			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('shortcode', $campaign_rss_feed_reader, false); ?> value="shortcode" /> <span style="background-color: lightblue; padding-left: 3px; padding-right: 3px;"><?php echo "[$post->post_name]" ?></span> <?php _e('Shortcode', 'wperss-page'); ?></label><br/><br>
-			
+			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('page_template', $campaign_rss_feed_reader, false); ?> value="page_template" />
+				<?php _e('RSS Page Template.', 'wperss-page'); ?><br /><?php _e('Must selected also on Page Attributes.', 'wperss-page'); ?></label><br />
+			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('shortcode', $campaign_rss_feed_reader, false); ?> value="shortcode" /> <span style="background-color: lightblue; padding-left: 3px; padding-right: 3px;"><?php echo "[wpe-$post->post_name]" ?></span> <?php _e('Shortcode', 'wperss-page'); ?></label><br/><br>
 			<label for="campaign_rss_html_content"><b><?php echo __('Template feed', 'wpematico') ?></b></label><br>
 			
 			<textarea id="campaign_rss_html_content" name="campaign_rss_html_content" rows="10" cols="100"><?php echo htmlspecialchars($campaign_rss_html_content); ?></textarea><br>
@@ -103,7 +104,7 @@ class Wpematico_feed_reader_edit {
 			echo '<select name="campaign_post_select">';
 			echo '<option value="">Select a Post</option>';
 			foreach ($custom_posts as $custom_post) {
-				$selected = (!empty($campaign_data['campaign_post_select'])) ? 'selected' : '';
+				$selected = (!empty($campaign_data['campaign_post_select']) && $campaign_data['campaign_post_select'] == $custom_post->ID) ? 'selected' : '';
 				echo '<option value="' . $custom_post->ID . '" ' . $selected . '>' . $custom_post->post_title . '</option>';
 			}
 			echo '</select>';
@@ -115,7 +116,7 @@ class Wpematico_feed_reader_edit {
 			'show_option_none' => 'Select a Page',
 			'sort_column'      => 'menu_order',
 			'echo'             => 1,
-			'selected'         => (!empty($campaign_data['campaign_page_select'])) ? $campaign_data['campaign_page_select'] : '',
+			'selected'         => !empty($campaign_data['campaign_page_select']) ? $campaign_data['campaign_page_select'] : '',
 		);
 		
 		echo '<div class="custom-dropdown hidden" id="custom-dropdown-pages">';
@@ -129,17 +130,23 @@ class Wpematico_feed_reader_edit {
 
 			$campaign_data['campaign_rss_html_content'] = (!isset($post_data['campaign_rss_html_content']) || empty($post_data['campaign_rss_html_content'])) ? $default_template : (($post_data['campaign_rss_html_content'] != '') ? $post_data['campaign_rss_html_content'] : $default_template);
 
-
-			if (!empty($post_data['campaign_post_select'])) {
-				// If 'campaign_post_select' has a value, set 'campaign_page_select' to empty
-				$campaign_data['campaign_page_select'] = $post_data['campaign_post_select'];
-				$campaign_data['campaign_post_select'] = '';
-			} elseif (!empty($post_data['campaign_page_select'])) {
-				// If 'campaign_page_select' has a value, set 'campaign_post_select' to empty
-				$campaign_data['campaign_post_select'] = $post_data['campaign_page_select'];
-				$campaign_data['campaign_page_select'] = '';
+			if ( $post_data['campaign_customposttype'] == 'post') {
+				if(!empty($post_data['campaign_post_select'])){
+					// If 'campaign_post_select' has a value, set 'campaign_page_select' to empty
+					$campaign_data['campaign_post_select'] = $post_data['campaign_post_select'];
+					$campaign_data['campaign_page_select'] = '';
+				}
+			}else{
+				if($post_data['campaign_customposttype'] == 'page'){
+					if (!empty($post_data['campaign_page_select'])) {
+						// If 'campaign_page_select' has a value, set 'campaign_post_select' to empty
+						$campaign_data['campaign_page_select'] = $post_data['campaign_page_select'];
+						$campaign_data['campaign_post_select'] = '';
+					}
+				}
 			}
 		}
+
 		return $campaign_data;
 	}
 }
