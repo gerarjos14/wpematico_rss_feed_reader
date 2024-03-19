@@ -20,6 +20,7 @@ class Wpematico_feed_reader_edit {
 	function __construct() {
 		add_action('admin_print_scripts-post.php', array(__CLASS__, 'admin_scripts'));
 		add_action('admin_print_scripts-post-new.php', array(__CLASS__, 'admin_scripts'));
+		add_action('wpematico_print_addicional_options', array(__CLASS__, 'wpematico_rss_print_addicional'));
 		// add_action('admin_print_styles-post.php', array(__CLASS__, 'admin_styles'));
 		// add_action('admin_print_styles-post-new.php', array(__CLASS__, 'admin_styles'));
 	}
@@ -66,7 +67,7 @@ class Wpematico_feed_reader_edit {
 		
 		if ($post->post_type != 'wpematico') return $post->ID;
 
-		wp_enqueue_script('googlo_news_campaign_edit', WPEMATICO_RSS_FEED_READER_URL . 'assets/js/campaign_edit.js', array('jquery'), WPEMATICO_RSS_FEED_READER_VER, true);
+		wp_enqueue_script('wpematico_rss_feed_reader_campaign_edit', WPEMATICO_RSS_FEED_READER_URL . 'assets/js/campaign_edit.js', array('jquery'), WPEMATICO_RSS_FEED_READER_VER, true);
 	}
 
 	public static function wpematico_rss_feed_reader_box() {
@@ -85,7 +86,42 @@ class Wpematico_feed_reader_edit {
 <?php
 	}
 
+	public static function wpematico_rss_print_addicional($campaign_data){
 
+		
+		// Dropdown for available posts
+		$custom_posts = get_posts(array(
+			'post_type'      => 'post',
+			'posts_per_page' => -1,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+		));
+
+		
+		if ($custom_posts) {
+			echo '<div class="custom-dropdown hidden" id="custom-dropdown-posts">';
+			echo '<select name="campaign_post_select">';
+			echo '<option value="">Select a Post</option>';
+			foreach ($custom_posts as $custom_post) {
+				$selected = (!empty($campaign_data['campaign_post_select'])) ? 'selected' : '';
+				echo '<option value="' . $custom_post->ID . '" ' . $selected . '>' . $custom_post->post_title . '</option>';
+			}
+			echo '</select>';
+			echo '</div>';
+		}
+
+		$args = array(
+			'name'             => 'campaign_page_select',
+			'show_option_none' => 'Select a Page',
+			'sort_column'      => 'menu_order',
+			'echo'             => 1,
+			'selected'         => (!empty($campaign_data['campaign_page_select'])) ? $campaign_data['campaign_page_select'] : '',
+		);
+		
+		echo '<div class="custom-dropdown hidden" id="custom-dropdown-pages">';
+			wp_dropdown_pages($args);
+		echo '</div>';
+	}
 	public static function wpematico_rss_feed_reader_check_campaigndata($campaign_data = array(), $post_data = array()){  // chequea y agrega campos a campaign y graba en free
 		if ($campaign_data['campaign_type'] == 'rss_reader') {
 			$default_template = wpematico_rss_feed_functions::wpematico_rss_get_default_template();
