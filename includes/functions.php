@@ -17,28 +17,30 @@ if (!defined('ABSPATH')) {
 
 class wpematico_rss_feed_functions {
 	public static function init(){
-		self::wpematico_rss_feed_initiation();
+		add_action('template_redirect', array(__CLASS__, 'wpematico_rss_feed_initiation'));
 	}
 
 	public static function wpematico_rss_feed_initiation() {
 		$campaigns = WpeMatico::get_campaigns();
-
-
 		
 		foreach ($campaigns as $campaign) {
 			if ($campaign['campaign_type'] == 'rss_reader') {
 
 				if (!empty($campaign['campaign_rss_feed_reader'])) {
-					
 					switch ($campaign['campaign_rss_feed_reader']) {
 						case 'shortcode':
-							$post_id = $campaign['ID']; //specify post id here
-							$slug = get_post_field('post_name', $post_id);
-
-							add_shortcode('wpe-' . $slug, array(__CLASS__, 'wpematico_rss_get_content'));
+							add_shortcode('wpe-' . $campaign['wpematico_shortcode_name'], array(__CLASS__, 'wpematico_rss_get_content'));
 							break;
-						default:
+						
+						case 'page_template':
 							add_action('the_content', array(__CLASS__, 'wpematico_rss_get_content'), 999);
+							break;
+
+						case 'the_content':
+							add_action('the_content', array(__CLASS__, 'wpematico_rss_get_content'), 999);
+							break;
+
+						default:
 							break;
 					}
 				}
@@ -64,14 +66,13 @@ class wpematico_rss_feed_functions {
 				$campaign_id = $campaign['ID'];
 
 				if($continue){
-
 					if($campaign_id){
 						$content = get_post_meta($campaign_id, 'feed_items');
 						$content = implode('', $content);
 
 					}
 				}else{
-					if(isset($campaign['campaign_rss_feed_reader']) && $campaign['campaign_rss_feed_reader'] == 'shortcode'){
+					if(isset($campaign['campaign_rss_feed_reader']) && $campaign['campaign_rss_feed_reader'] == 'shortcode' && has_shortcode($post->post_content, "wpe-" . $campaign['wpematico_shortcode_name'])){
 						$content = get_post_meta($campaign_id, 'feed_items');
 						$content = implode('', $content);
 					}

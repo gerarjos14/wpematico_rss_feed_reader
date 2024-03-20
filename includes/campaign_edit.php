@@ -81,6 +81,7 @@ class Wpematico_feed_reader_edit {
 			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('page_template', $campaign_rss_feed_reader, false); ?> value="page_template" />
 				<?php _e('RSS Page Template.', 'wperss-page'); ?><br /><?php _e('Must selected also on Page Attributes.', 'wperss-page'); ?></label><br />
 			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('shortcode', $campaign_rss_feed_reader, false); ?> value="shortcode" /> <span style="background-color: lightblue; padding-left: 3px; padding-right: 3px;"><?php echo "[wpe-$post->post_name]" ?></span> <?php _e('Shortcode', 'wperss-page'); ?></label><br/><br>
+			<input type="hidden" name="wpematico_shortcode_name" value="<?php echo "$post->post_name" ?>">
 			<label for="campaign_rss_html_content"><b><?php echo __('Template feed', 'wpematico') ?></b></label><br>
 			
 			<textarea id="campaign_rss_html_content" name="campaign_rss_html_content" rows="10" cols="100"><?php echo htmlspecialchars($campaign_rss_html_content); ?></textarea><br>
@@ -123,10 +124,19 @@ class Wpematico_feed_reader_edit {
 			wp_dropdown_pages($args);
 		echo '</div>';
 	}
-	public static function wpematico_rss_feed_reader_check_campaigndata($campaign_data = array(), $post_data = array()){  // chequea y agrega campos a campaign y graba en free
+	public static function wpematico_rss_feed_reader_check_campaigndata($campaign_data = array(), $post_data = array()){
+		global $post;
+		// chequea y agrega campos a campaign y graba en free
 		if ($campaign_data['campaign_type'] == 'rss_reader') {
 			$default_template = wpematico_rss_feed_functions::wpematico_rss_get_default_template();
 			$campaign_data['campaign_rss_feed_reader'] = (!isset($post_data['campaign_rss_feed_reader']) || empty($post_data['campaign_rss_feed_reader'])) ? '' : (($post_data['campaign_rss_feed_reader'] != '') ? $post_data['campaign_rss_feed_reader'] : '');
+
+			$campaign_data['wpematico_shortcode_name'] = (!isset($post_data['wpematico_shortcode_name']) || empty($post_data['wpematico_shortcode_name'])) ? sanitize_title($post_data['campaign_title']) : (($post_data['wpematico_shortcode_name'] != '') ? $post_data['wpematico_shortcode_name'] : sanitize_title($post_data['campaign_title']));
+
+			if($campaign_data['wpematico_shortcode_name']){
+				if(isset($post->post_name))
+					$campaign_data['wpematico_shortcode_name'] = "$post->post_name";
+			}
 
 			$campaign_data['campaign_rss_html_content'] = (!isset($post_data['campaign_rss_html_content']) || empty($post_data['campaign_rss_html_content'])) ? $default_template : (($post_data['campaign_rss_html_content'] != '') ? $post_data['campaign_rss_html_content'] : $default_template);
 

@@ -52,9 +52,8 @@ class Wpematico_feed_reader_process {
 				return false;
 			}
 		}
-		die();
 
-		return true;
+		return $allow;
 	}
 
 	public static function set_rss_data($campaign, $item, $template = ''){
