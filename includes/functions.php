@@ -85,8 +85,7 @@ class wpematico_rss_feed_functions {
 	public static function wpematico_rss_get_default_template(){
 
 		return 
-		"<div id='wpe_rss-content' class='wpe_rss-content'>
-		~~~BeginItemsRecord~~~  
+		"~~~BeginItemsRecord~~~  
 		  <div class='wpe_rss-item'>
 			<div class='wpe_rss-title'>
 			  <h2><a href='~~~ItemLink~~~' target='_blank'>~~~ItemTitle~~~</a></h2>
@@ -101,7 +100,6 @@ class wpematico_rss_feed_functions {
 			  <a href='~~~ItemSourceUrl~~~' class='wpe_rss-btn'>Go to source</a>
 			</div>
 		  </div>
-		~~~EndItemsRecord~~~
-		</div>";
+		~~~EndItemsRecord~~~";
 	}
 }
