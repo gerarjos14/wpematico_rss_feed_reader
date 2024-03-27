@@ -2,23 +2,16 @@
 /**
  * Plugin Name:     WPeMatico RSS Feed Reader
  * Plugin URI:      @todo
- * Description:     
- * Version:         1.0
- * Author:          etruel
- * Author URI:      http://www.netmdp.com
+ * Description:     RSS Feed Reader Add-on allows to use WPeMatico from a Wordpress website.
+ * Version:         1.0.0
+ * Author: Etruel Developments LLC
+ * Author URI: https://etruel.com/wpematico/
  * Text Domain:     wpematico_rss_feed_reader
  *
  * @package         etruel\RSS Feed Reader
  * @author          Esteban Truelsegaard
  * @copyright       Copyright (c) 2016
  *
- *
- * - Find all instances of @todo in the plugin and update the relevant
- *   areas as necessary.
- *
- * - All functions that are not class methods MUST be prefixed with the
- *   plugin name, replacing spaces with underscores. NOT PREFIXING YOUR
- *   FUNCTIONS CAN CAUSE PLUGIN CONFLICTS!
  */
 
 
@@ -29,7 +22,7 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
 
 	// Plugin version
 	if(!defined('WPEMATICO_RSS_FEED_READER_VER')) {
-		define('WPEMATICO_RSS_FEED_READER_VER', '1.0.2' );
+		define('WPEMATICO_RSS_FEED_READER_VER', '1.0.0' );
 	}
 	
     /**
@@ -104,16 +97,10 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
          */
          public static function includes() {
             // Include scripts
-			
-			// require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/scripts.php';
-			require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/settings.php';
             require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/plugin_functions.php';
             require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/functions.php';
             require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/campaign_edit.php';
             require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/processing.php';
-
-            // require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/shortcodes.php';
-            // require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/widgets.php';
         }
 
 
@@ -128,25 +115,9 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
          public static function hooks() {
             add_action('init', array('wpematico_rss_feed_functions', 'init'));
             // Register settings
-            add_filter( 'wpematico_settings_extensions', array(__CLASS__, 'settings' ), 1 );
-			add_filter( 'wpematico_plugins_updater_args', array(__CLASS__, 'add_updater'), 10, 1);
             // add_action('loop_start', 'wpematico_rss_feed_initiation');
         }
 		
-		public static function add_updater($args) {
-			if (empty($args['rss_feed_reader'])) {
-				$args['rss_feed_reader'] = array();
-				$args['rss_feed_reader']['api_url'] = WPEMATICO_RSS_FEED_READER_STORE_URL;
-				$args['rss_feed_reader']['plugin_file'] = WPEMATICO_RSS_FEED_READER_ROOT_FILE;
-				$args['rss_feed_reader']['api_data'] = array(
-														'version' 	=> WPEMATICO_RSS_FEED_READER_VER, 				// current version number
-														'item_name' => WPEMATICO_RSS_FEED_READER_ITEM_NAME, 	// name of this plugin
-														'author' 	=> 'Esteban Truelsegaard'  // author of this plugin
-													);
-					
-			}
-			return $args;
-		}
         /**
          * Internationalization
          *
@@ -179,29 +150,8 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
             }
         }
 
-
-        /**
-         * Add settings
-         *
-         * @access      public
-         * @since       1.0.0
-         * @param       array $settings The existing EDD settings array
-         * @return      array The modified EDD settings array
-         */
-        public static function settings( $settings ) {
-            $new_settings = array(
-                array(
-                    'id'    => 'rss_feed_reader_settings',
-                    'name'  => '<strong>' . __( 'Plugin Name Settings', 'rss_feed_reader' ) . '</strong>',
-                    'desc'  => __( 'Configure Plugin Name Settings', 'rss_feed_reader' ),
-                    'type'  => 'header',
-                )
-            );
-
-            return array_merge( $settings, $new_settings );
-        }
-    }
 } // End if class_exists check
+
 
 
 /**
@@ -248,3 +198,4 @@ function rss_feed_reader_activation() {
 	}
 }
 register_activation_hook( __FILE__, 'rss_feed_reader_activation' );
+}

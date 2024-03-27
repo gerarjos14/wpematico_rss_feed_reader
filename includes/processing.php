@@ -49,7 +49,8 @@ class Wpematico_feed_reader_process {
 			$campaign_rss_html_content = $campaign['campaign_rss_html_content'];
 
 			if (self::set_rss_data($campaign, $current_item, $campaign_rss_html_content)) {
-				return false;
+				$allow = false;
+				return $allow;
 			}
 		}
 
@@ -60,7 +61,18 @@ class Wpematico_feed_reader_process {
 
 		$campaign_id = $campaign['ID'];
 		if($campaign_id){
+			// get all posts
+			$all_posts = get_post_meta($campaign_id, 'feed_items');
 
+			if (count($all_posts) > $campaign['campaign_max_to_show']) {
+				// order by lastest to oldest posts
+				$all_posts = array_reverse($all_posts);
+
+				// erase the oldest posts
+				for ($i = $campaign['campaign_max_to_show']; $i < count($all_posts); $i++) {
+					delete_post_meta($campaign_id, 'feed_items', $all_posts[$i]);
+				}
+			}
 			//start the process to change the template to a feed
 			$template = str_replace('~~~BeginItemsRecord~~~', '', $template);
 			$template = str_replace('~~~ItemAuthor~~~', $item['author'], $template);

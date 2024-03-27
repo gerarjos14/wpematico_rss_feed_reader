@@ -18,6 +18,8 @@ if (!defined('ABSPATH')) {
 class wpematico_rss_feed_functions {
 	public static function init(){
 		add_action('template_redirect', array(__CLASS__, 'wpematico_rss_feed_initiation'));
+		add_filter('theme_page_templates', array(__CLASS__,'wpematico_add_custom_template'));
+		add_action('admin_action_wpematico_reset_campaign', array(__CLASS__, 'wpematico_reset_campaign'), 1);
 	}
 
 	public static function wpematico_rss_feed_initiation() {
@@ -51,8 +53,6 @@ class wpematico_rss_feed_functions {
 	public static function wpematico_rss_get_content($content= ''){
 		global $post;
 		
-		if ($post->post_type !== 'post' && $post->post_type !== 'page') return;
-
 		$campaigns = WpeMatico::get_campaigns();
 
 		foreach($campaigns as $campaign){
@@ -68,13 +68,16 @@ class wpematico_rss_feed_functions {
 				if($continue){
 					if($campaign_id){
 						$content = get_post_meta($campaign_id, 'feed_items');
-						$content = implode('', $content);
-
+						$content = array_reverse($content);
+						$recent_content = array_slice($content, 0, $campaign['campaign_max_to_show']); // Get the most recent items
+						$content = implode('', $recent_content);
 					}
 				}else{
 					if(isset($campaign['campaign_rss_feed_reader']) && $campaign['campaign_rss_feed_reader'] == 'shortcode' && has_shortcode($post->post_content, "wpe-" . $campaign['wpematico_shortcode_name'])){
 						$content = get_post_meta($campaign_id, 'feed_items');
-						$content = implode('', $content);
+						$content = array_reverse($content);
+						$recent_content = array_slice($content, 0, $campaign['campaign_max_to_show']); // Get the most recent items
+						$content = implode('', $recent_content);
 					}
 				}
 			}
@@ -103,4 +106,28 @@ class wpematico_rss_feed_functions {
 		  </div>
 		~~~EndItemsRecord~~~";
 	}
+
+	public static function wpematico_add_custom_template($templates){
+		$templates[WPEMATICO_RSS_FEED_READER_DIR . 'templates/wpematico-rss-template.php'] = __('Feed reader template', 'rss_feed_reader');
+
+		return $templates;
+	}
+
+	public static function wpematico_reset_campaign($status = '') {
+		if (!( isset($_GET['post']) || isset($_POST['post']) || ( isset($_REQUEST['action']) && 'wpematico_reset_campaign' == $_REQUEST['action'] ) )) {
+			wp_die(__('No campaign ID has been supplied!', 'wpematico'));
+		}
+		$nonce = '';
+		if (isset($_REQUEST['nonce'])) {
+			$nonce = sanitize_text_field($_REQUEST['nonce']);
+		}
+		if (!wp_verify_nonce($nonce, 'wpe-action-nonce')) {
+			wp_die('Are you sure?');
+		}
+		// Get the original post
+		$id = (isset($_GET['post']) ? absint($_GET['post']) : absint($_POST['post']) );
+
+		delete_post_meta($id, 'feed_items');
+	}
+
 }

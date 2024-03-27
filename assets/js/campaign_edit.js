@@ -8,10 +8,12 @@ jQuery(document).ready(function ($) {
             if (selectedValue === 'the_content') {
                 $('#custom-dropdown-posts').show();
                 $('#custom-dropdown-pages').hide();
+                $('#rss_page_template').hide();
                 toggleCustomTypes();
                 $('input[name="campaign_customposttype"]').not(':radio[name="campaign_customposttype"][value="page"]').prop('disabled', false);
             } else if (selectedValue === 'page_template') {
                 $('#custom-dropdown-pages').show();
+                $('#rss_page_template').show();
                 $('#custom-dropdown-posts').hide();
                 
                 $('input[name="campaign_customposttype"]').not(':radio[name="campaign_customposttype"][value="page"]').prop('disabled', true);
@@ -20,6 +22,7 @@ jQuery(document).ready(function ($) {
             } else {
                 $('#custom-dropdown-posts').hide();
                 $('#custom-dropdown-pages').hide();
+                $('#rss_page_template').hide();
 
                 $('input[name="campaign_customposttype"]').not(':radio[name="campaign_customposttype"][value="page"]').prop('disabled', false);
             }
