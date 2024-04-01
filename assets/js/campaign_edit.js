@@ -13,7 +13,9 @@ jQuery(document).ready(function ($) {
                 $('input[name="campaign_customposttype"]').not(':radio[name="campaign_customposttype"][value="page"]').prop('disabled', false);
             } else if (selectedValue === 'page_template') {
                 $('#custom-dropdown-pages').show();
-                $('#rss_page_template').show();
+                if($('#campaign_page_select').val()){
+                    $('#rss_page_template').show();
+                }
                 $('#custom-dropdown-posts').hide();
                 
                 $('input[name="campaign_customposttype"]').not(':radio[name="campaign_customposttype"][value="page"]').prop('disabled', true);
@@ -37,20 +39,21 @@ jQuery(document).ready(function ($) {
         if ($('#campaign_type').val() == 'rss_reader') {
             var postTypes = $('input[name="campaign_customposttype"]:checked').val();
             var selectedValue = $('input[name="campaign_rss_feed_reader"]:checked').val();
-            
-            if(selectedValue !== 'shortcode'){
-                if (postTypes == 'post') {
-                    $('#custom-dropdown-posts').show();
-                    $('#custom-dropdown-pages').hide();
-                } else if (postTypes == 'page') {
-                    $('#custom-dropdown-pages').show();
-                    $('#custom-dropdown-posts').hide();
-                } else {
-                    $('#custom-dropdown-posts').hide();
-                    $('#custom-dropdown-pages').hide();
+
+            if (selectedValue !== 'shortcode') {
+                if (selectedValue) {
+                    if (postTypes == 'post') {
+                        $('#custom-dropdown-posts').show();
+                        $('#custom-dropdown-pages').hide();
+                    } else if (postTypes == 'page') {
+                        $('#custom-dropdown-pages').show();
+                        $('#custom-dropdown-posts').hide();
+                    } else {
+                        $('#custom-dropdown-posts').hide();
+                        $('#custom-dropdown-pages').hide();
+                    }
                 }
             }
-            
         }
     }
 
@@ -72,6 +75,21 @@ jQuery(document).ready(function ($) {
             $('#custom-dropdown-pages').hide();
         }else{
             toggleCustomTypes();
+        }
+    });
+    $('#campaign_page_select').on('change', function () {
+        if($('#campaign_page_select').val()){
+            toggleDropdowns();
+        }else{
+            $('#rss_page_template').hide();
+        }
+    });
+    $('#campaign_max_to_show , #campaign_max').on('blur', function (){
+        if( $('#campaign_max_to_show').val() !==  $('#campaign_max').val()){
+            $('#fieldserror').remove();
+					$("#poststuff").prepend('<div id="fieldserror" class="error fade">ERROR: ' + backend_object_rss.error_message + '</div>');
+        }else{
+            $('#fieldserror').remove();
         }
     });
 });

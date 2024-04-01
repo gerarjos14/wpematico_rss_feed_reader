@@ -74,10 +74,10 @@ class wpematico_rss_feed_functions {
 					}
 				}else{
 					if(isset($campaign['campaign_rss_feed_reader']) && $campaign['campaign_rss_feed_reader'] == 'shortcode' && has_shortcode($post->post_content, "wpe-" . $campaign['wpematico_shortcode_name'])){
-						$content = get_post_meta($campaign_id, 'feed_items');
-						$content = array_reverse($content);
-						$recent_content = array_slice($content, 0, $campaign['campaign_max_to_show']); // Get the most recent items
-						$content = implode('', $recent_content);
+						$content_rss = get_post_meta($campaign_id, 'feed_items');
+						$content_rss = array_reverse($content_rss);
+						$recent_content = array_slice($content_rss, 0, $campaign['campaign_max_to_show']); // Get the most recent items
+						$content .= implode('', $recent_content);
 					}
 				}
 			}

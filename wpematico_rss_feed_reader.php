@@ -100,6 +100,7 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
             require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/plugin_functions.php';
             require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/functions.php';
             require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/campaign_edit.php';
+            require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/campaign_help.php';
             require_once WPEMATICO_RSS_FEED_READER_DIR . 'includes/processing.php';
         }
 
@@ -114,8 +115,6 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
          */
          public static function hooks() {
             add_action('init', array('wpematico_rss_feed_functions', 'init'));
-            // Register settings
-            // add_action('loop_start', 'wpematico_rss_feed_initiation');
         }
 		
         /**
