@@ -17,13 +17,16 @@ if (!defined('ABSPATH')) {
 
 class wpematico_rss_feed_functions {
 	public static function init(){
-		add_action('template_redirect', array(__CLASS__, 'wpematico_rss_feed_initiation'));
+		add_action('template_redirect', array(__CLASS__, 'wpematico_rss_feed_initiation'), 999999);
 		add_filter('theme_page_templates', array(__CLASS__,'wpematico_add_custom_template'));
 		add_action('admin_action_wpematico_reset_campaign', array(__CLASS__, 'wpematico_reset_campaign'), 1);
 	}
 
 	public static function wpematico_rss_feed_initiation() {
+		global $stopwith;
 		$campaigns = WpeMatico::get_campaigns();
+		
+		$stopwith = array();
 		
 		foreach ($campaigns as $campaign) {
 			if ($campaign['campaign_type'] == 'rss_reader') {
@@ -51,10 +54,10 @@ class wpematico_rss_feed_functions {
 	}
 
 	public static function wpematico_rss_get_content($content= ''){
-		global $post;
+		global $post, $stopwith;
 		
 		$campaigns = WpeMatico::get_campaigns();
-
+		
 		foreach($campaigns as $campaign){
 			if ($campaign['campaign_type'] == 'rss_reader' ) {
 				$continue = false;
@@ -64,7 +67,6 @@ class wpematico_rss_feed_functions {
 					$continue = ($campaign['campaign_page_select'] == $post->ID);
 				}
 				$campaign_id = $campaign['ID'];
-
 				if($continue){
 					if($campaign_id){
 						$content = get_post_meta($campaign_id, 'feed_items');
@@ -73,11 +75,16 @@ class wpematico_rss_feed_functions {
 						$content = implode('', $recent_content);
 					}
 				}else{
-					if(isset($campaign['campaign_rss_feed_reader']) && $campaign['campaign_rss_feed_reader'] == 'shortcode' && has_shortcode($post->post_content, "wpe-" . $campaign['wpematico_shortcode_name'])){
+					if(isset($campaign['campaign_rss_feed_reader']) && $campaign['campaign_rss_feed_reader'] == 'shortcode' && has_shortcode($post->post_content, "wpe-" . $campaign['wpematico_shortcode_name']) && !in_array($campaign['wpematico_shortcode_name'], $stopwith)){
+						$currentshortcode = array($campaign['wpematico_shortcode_name']);
+						$stopwith = array_merge($stopwith, $currentshortcode);
+
 						$content_rss = get_post_meta($campaign_id, 'feed_items');
 						$content_rss = array_reverse($content_rss);
 						$recent_content = array_slice($content_rss, 0, $campaign['campaign_max_to_show']); // Get the most recent items
-						$content .= implode('', $recent_content);
+						$recent_content = implode('', $recent_content);
+						
+						$content .= $recent_content;
 					}
 				}
 			}
@@ -95,7 +102,6 @@ class wpematico_rss_feed_functions {
 			  <h2><a href='~~~ItemLink~~~' target='_blank'>~~~ItemTitle~~~</a></h2>
 			</div>
 			<div class='wpe_rss-metadata'>
-			  <div class='wpe_rss-metadata-item'><span class='dashicons dashicons-admin-users'></span> <span>~~~ItemAuthor~~~</span></div>
 			  <div class='wpe_rss-metadata-item'><span class='dashicons dashicons-calendar'></span> <span>~~~ItemPubShortDate~~~ ~~~ItemPubShortTime~~~</span></div>
 			</div>
 			<div class='wpe_rss-description'>
