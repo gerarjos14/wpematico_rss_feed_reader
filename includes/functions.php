@@ -84,7 +84,7 @@ class wpematico_rss_feed_functions {
 						$recent_content = array_slice($content_rss, 0, $campaign['campaign_max_to_show']); // Get the most recent items
 						$recent_content = implode('', $recent_content);
 						
-						$content .= $recent_content;
+						$content = $recent_content;
 					}
 				}
 			}
