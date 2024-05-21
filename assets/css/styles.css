@@ -1,0 +1,24 @@
+.wpe_rss-display .wpe_rss_code{
+  padding: 3px 6px;
+  background-color: #e0e8f6;
+}
+.wpe_rss-display .description{
+  padding-left: 27px;
+}
+.wpe_rss-template textarea{
+  width: 100%;
+}
+.wpe_rss_dropdown{
+  margin-top: 5px;
+}
+.wpe_rss_dropdown, .wpe_rss_page_template{
+  margin-bottom: 5px;
+}
+.wpe_rss_dropdown select, .wpe_rss_page_template select{
+  width: 100%;
+}
+@media (min-width: 783px){
+  .wpe_rss-display .description{
+    padding-left: 23px;
+  }
+}
