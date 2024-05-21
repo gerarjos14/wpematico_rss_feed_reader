@@ -47,8 +47,6 @@ class Wpematico_feed_reader_edit
 			'audios-box','videos-box','cron-box','template-box',
 			//Full Content box 
 			'fullcontent-box',
-			//Professional boxes
-			'cfields-box','cfeed-tags-box','kwordf-box','wcountf-box','custitle-box', 'pro-parsers-box', 'postexcerpt',
 			//Synchronizer
 			'wpe-sync-data'
 			));
