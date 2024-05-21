@@ -1,34 +1,61 @@
 === RSS Feed Reader ===
-Contributors: etruel
+Contributors: etruel, khaztiel, gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B8V39NWK3NFQU
 Tags: wpematico, RSS Feed Reader, autoblog, rss, feed, read, matic
-Requires at least: 4.1
-Tested up to: 4.9
-Stable tag: 1.0.2
+Requires at least: 6.4
+Tested up to: 6.5.3
+Stable tag: 1.0
 
 Add On for WPeMatico plugin. Adds a feature to 
 
 == Description ==
-RSS Feed Reader Add-on allows to use WPeMatico from a Wordpress website.
- 
+The RSS Feed Reader addon further enhances the functionality of WPeMatico by allowing to read and display the RSS feed results using shortcodes, page templates or the get_the_content function on your WordPress site without creating the posts.
+
 = How it works =
 
-The Add-on will use the whole campaign data to obtain the content to be published automatically.
+The RSS Feed Reader plugin simplifies RSS feed integration and allows you to customise the way feed results are dynamically displayed on your WordPress site with flexible options such as shortcodes, page templates and WordPress’ internal function to change the content with get_the_content filter on each selected Custom Post Type.
+
+In addition many options of the WPeMatico standard campaigns are available to parse and filter the content displayed in the feeds.
  
 = Features =
 
+The most important characteristics that makes this add-on the first choice comparing to others are the next ones:
+
+> * Allows to display RSS feed results dynamically, without create new post types on your WordPress site.
+> * Set a maximum limit on how many feed items will be shown in the selected post type, regardless of the method you have chosen.
+> * Choose a specific post or post-type previously created to display the feed content using the WordPress function get_the_content.
+> * Page template for pages only, select a previously created page to display the feed content, you can also choose the default page template from the plugin or theme’s page templates.
+> * Generate a [shortcode] using the campaign slug and insert it anywhere on your website (posts, pages, cpt, widgets, and more) to display the feed content.
+> * Customize the HTML structure where the feed items will be displayed, adjust the layout, styles and visual components to perfectly fit your site.
  
 = Requirements =
 As WPeMatico Add-on requires WPeMatico base plugin installed and activated.  
-PHP 5.3 or higher
+PHP 7.0 or higher
 Works with Professional, Better Excerpts and Full Content add-ons but there are not required.
 
 == Installation ==
 
 You can either install it automatically from the WordPress admin, or do it manually:
 
-1. Unzip plugin archive and put the folder into your plugins folder (/wp-content/plugins/).
+= Using the Plugin Manager =
+
+1. Click Plugins
+2. Click Add New
+3. Search for `wpematico-rss-feed-reader`
+4. Click Install
+5. Click Install Now
+6. Click Activate Plugin
+7. Now you use the addon features in WPeMatico's campaigns
+
+= Manually =
+
+1. Upload `wpematico-rss-feed-reader` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin from the WPeMatico Extensions menu.
+
+== Screenshots ==
+
+1. RSS Feed Reader Campaign details.
+2. Metabox details.
 
 == Frequently Asked Questions ==
 
@@ -36,18 +63,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 No. Plugin requires WPeMatico Free Version installed and activated.
 
-== Screenshots ==
-
-1. Files details.
-
 == Changelog ==
 
-= 1.0.2 Aug 10, 2017 =
-* Activation hook moved from plugin functions to main file.
-* Screenshot with the rss_feed_reader files details.
-
-= 1.0.1 Jun 21, 2017 =
-* Added plugin_loaded action to load the plugin.
-
 = 1.0 =
-* initial release
+* First release
