@@ -191,8 +191,7 @@ add_action( 'plugins_loaded', 'Wpematico_rss_feed_reader_load',999);
 function rss_feed_reader_activation() {
     /* Activation functions here */
 	if(class_exists('WPeMatico')) {
-		$link= '<a href="' . admin_url("edit.php?post_type=wpematico&page=wpematico_settings&tab=rss_feed_reader") . '">'.__('RSS Feed Reader Plugin Settings.',  'rss_feed_reader')."</a>";
-		$notice= __('RSS Feed Reader Activated.  Please check the fields on', 'rss_feed_reader').' '. $link;
+		$notice= __('RSS Feed Reader Activated.', 'rss_feed_reader');
 		WPeMatico::add_wp_notice( array('text' => $notice , 'below-h2'=>false ) );
 	}
 }
