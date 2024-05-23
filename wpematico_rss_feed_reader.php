@@ -30,7 +30,11 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
      *
      * @since       1.0.0
      */
-    class WpeMatico_RSS_Feed_Reader {
+    class WpeMatico_RSS_Feed_Reader{
+
+        public function __construct(){
+            //To add anything            
+        }
 
         /**
          * @var         WpeMatico_RSS_Feed_Reader $instance The one true RSS Feed Reader
@@ -44,9 +48,12 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
          *
          * @access      public
          * @since       1.0.0
-         * @return      object self::$instance The one true RSS Feed Reader
+         * @return      object|bool self::$instance The one true RSS Feed Reader
          */
         public static function instance() {
+            if(!wpematico_rss_requirements())
+                return false;
+
             if( !self::$instance ) {
                 self::$instance = new self();
                 self::$instance->setup_constants();
@@ -196,4 +203,34 @@ function rss_feed_reader_activation() {
 	}
 }
 register_activation_hook( __FILE__, 'rss_feed_reader_activation' );
+
+function wpematico_rss_requirements(){
+    $message = $wperss_admin_message = '';
+    $checks = true;
+    // Core is not updated, Rss feed reader too new to use. 
+    if (class_exists('WPeMatico') && version_compare(WPEMATICO_VERSION, '2.7', '<')) {
+        $message .= sprintf(__('The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s', 'wpematico'), WPEMATICO_RSS_FEED_READER_VER, '2.7') . '<br />';
+        $message .= sprintf(
+            __('Please %s to the last version ASAP to avoid errors.', 'wpematico'),
+            ' <a href="' . admin_url('plugins.php') . '#wpematico">update "WPeMatico"</a>'
+        );
+
+        // Patch to try to fix some problems on core trying to run nonstatic functions
+
+        $checks = false;
+    }
+
+    if (!empty($message))
+        $wperss_admin_message	 = '<div id="message" class="error fade"><strong>WPeMatico Professional:</strong><br />' . $message . '</div>';
+
+    if (!empty($wperss_admin_message)) {
+        //send response to admin notice : ejemplo con la función dentro del add_action
+        add_action('admin_notices', function () use ($wperss_admin_message) {
+            //echo '<div class="error"><p>', esc_html($wpematico_admin_message), '</p></div>';
+            echo $wperss_admin_message;
+        });
+    }
+
+    return $checks;
+}
 }
