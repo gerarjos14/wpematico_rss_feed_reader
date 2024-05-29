@@ -221,7 +221,7 @@ function wpematico_rss_requirements(){
     }
 
     if (!empty($message))
-        $wperss_admin_message	 = '<div id="message" class="error fade"><strong>WPeMatico Professional:</strong><br />' . $message . '</div>';
+        $wperss_admin_message	 = '<div id="message" class="error fade"><strong>WPeMatico RSS Feed Reader:</strong><br />' . $message . '</div>';
 
     if (!empty($wperss_admin_message)) {
         //send response to admin notice : ejemplo con la función dentro del add_action
