@@ -1,16 +1,16 @@
 <?php
 /**
  * Plugin Name:     WPeMatico RSS Feed Reader
- * Plugin URI:      @todo
- * Description:     RSS Feed Reader Add-on allows to use WPeMatico from a Wordpress website.
+ * Plugin URI:      https://etruel.com/downloads/wpematico-rss-feed-reader/
+ * Description:     RSS Feed Reader print pre-formatted feeds contents directly on your pages, posts, widgets, etc. 
  * Version:         1.0.0
- * Author: Etruel Developments LLC
- * Author URI: https://etruel.com/wpematico/
- * Text Domain:     wpematico_rss_feed_reader
+ * Author:			Etruel Developments LLC
+ * Author URI:		https://etruel.com/
+ * Text Domain:     wpematico-rss-feed-reader
  *
  * @package         etruel\RSS Feed Reader
  * @author          Esteban Truelsegaard
- * @copyright       Copyright (c) 2016
+ * @copyright       Copyright (c) 2024
  *
  */
 
@@ -18,7 +18,7 @@
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) exit;
 
-if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
+if( !class_exists( 'WPeMatico_RSS_Feed_Reader' ) ) {
 
 	// Plugin version
 	if(!defined('WPEMATICO_RSS_FEED_READER_VER')) {
@@ -30,14 +30,14 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
      *
      * @since       1.0.0
      */
-    class WpeMatico_RSS_Feed_Reader{
+    class WPeMatico_RSS_Feed_Reader{
 
         public function __construct(){
             //To add anything            
         }
 
         /**
-         * @var         WpeMatico_RSS_Feed_Reader $instance The one true RSS Feed Reader
+         * @var         WPeMatico_RSS_Feed_Reader $instance The one true RSS Feed Reader
          * @since       1.0.0
          */
         private static $instance;
@@ -132,28 +132,8 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
          * @return      void
          */
          public static function load_textdomain() {
-            // Set filter for language directory
             $lang_dir = WPEMATICO_RSS_FEED_READER_DIR . '/languages/';
-            $lang_dir = apply_filters( 'rss_feed_reader_languages_directory', $lang_dir );
-
-            // Traditional WordPress plugin locale filter
-            $locale = apply_filters( 'plugin_locale', get_locale(), 'rss_feed_reader' );
-            $mofile = sprintf( '%1$s-%2$s.mo', 'rss_feed_reader', $locale );
-
-            // Setup paths to current locale file
-            $mofile_local   = $lang_dir . $mofile;
-            $mofile_global  = WP_LANG_DIR . '/rss_feed_reader/' . $mofile;
-
-            if( file_exists( $mofile_global ) ) {
-                // Look in global /wp-content/languages/rss_feed_reader/ folder
-                load_textdomain( 'rss_feed_reader', $mofile_global );
-            } elseif( file_exists( $mofile_local ) ) {
-                // Look in local /wp-content/plugins/rss_feed_reader/languages/ folder
-                load_textdomain( 'rss_feed_reader', $mofile_local );
-            } else {
-                // Load the default language files
-                load_plugin_textdomain( 'rss_feed_reader', false, $lang_dir );
-            }
+            load_plugin_textdomain( 'rss_feed_reader', false, $lang_dir );
         }
 
 } // End if class_exists check
@@ -165,14 +145,14 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
  * instance to functions everywhere
  *
  * @since       1.0.0
- * @return      \WpeMatico_RSS_Feed_Reader The one true RSS Feed Reader
+ * @return      \WPeMatico_RSS_Feed_Reader The one true RSS Feed Reader
  *
  * @todo        Inclusion of the activation code below isn't mandatory, but
  *              can prevent any number of errors, including fatal errors, in
  *              situations where your extension is activated but EDD is not
  *              present.
  */
-function Wpematico_rss_feed_reader_load() {
+function WPematico_rss_feed_reader_load() {
     if( !class_exists( 'WPeMatico' ) ) {
         if( !class_exists( 'WPeMatico_Extension_Activation' ) ) {
             require_once 'includes/class.extension-activation.php';
@@ -181,10 +161,10 @@ function Wpematico_rss_feed_reader_load() {
         $activation = new WPeMatico_Extension_Activation( plugin_dir_path( __FILE__ ), basename( __FILE__ ) );
         $activation = $activation->run();
     } else {
-        return WpeMatico_RSS_Feed_Reader::instance();
+        return WPeMatico_RSS_Feed_Reader::instance();
     }
 }
-add_action( 'plugins_loaded', 'Wpematico_rss_feed_reader_load',999);
+add_action( 'plugins_loaded', 'WPematico_rss_feed_reader_load',999);
 
 /**
  * The activation hook is called outside of the singleton because WordPress doesn't
@@ -198,7 +178,7 @@ add_action( 'plugins_loaded', 'Wpematico_rss_feed_reader_load',999);
 function rss_feed_reader_activation() {
     /* Activation functions here */
 	if(class_exists('WPeMatico')) {
-		$notice= __('RSS Feed Reader Activated.', 'rss_feed_reader');
+		$notice= __('WPeMatico RSS Feed Reader Activated.', 'rss_feed_reader');
 		WPeMatico::add_wp_notice( array('text' => $notice , 'below-h2'=>false ) );
 	}
 }
@@ -207,16 +187,13 @@ register_activation_hook( __FILE__, 'rss_feed_reader_activation' );
 function wpematico_rss_requirements(){
     $message = $wperss_admin_message = '';
     $checks = true;
-    // Core is not updated, Rss feed reader too new to use. 
+    // Core is not installed. 
     if (class_exists('WPeMatico') && version_compare(WPEMATICO_VERSION, '2.7', '<')) {
         $message .= sprintf(__('The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s', 'wpematico'), WPEMATICO_RSS_FEED_READER_VER, '2.7') . '<br />';
         $message .= sprintf(
             __('Please %s to the last version ASAP to avoid errors.', 'wpematico'),
             ' <a href="' . admin_url('plugins.php') . '#wpematico">update "WPeMatico"</a>'
         );
-
-        // Patch to try to fix some problems on core trying to run nonstatic functions
-
         $checks = false;
     }
 
@@ -224,9 +201,8 @@ function wpematico_rss_requirements(){
         $wperss_admin_message	 = '<div id="message" class="error fade"><strong>WPeMatico RSS Feed Reader:</strong><br />' . $message . '</div>';
 
     if (!empty($wperss_admin_message)) {
-        //send response to admin notice : ejemplo con la función dentro del add_action
+        //send response to admin notice
         add_action('admin_notices', function () use ($wperss_admin_message) {
-            //echo '<div class="error"><p>', esc_html($wpematico_admin_message), '</p></div>';
             echo $wperss_admin_message;
         });
     }
