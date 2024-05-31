@@ -15,7 +15,7 @@ function rss_feed_reader_admin_init(){
 register_deactivation_hook( plugin_basename( WPEMATICO_RSS_FEED_READER_ROOT_FILE ), 'rss_feed_reader_deactivate' );
 function rss_feed_reader_deactivate() {
 	if(class_exists('WPeMatico')) {
-		$notice = __('RSS Feed Reader DEACTIVATED.',  'rss_feed_reader');
+		$notice = __('RSS Feed Reader DEACTIVATED.',  'wpematico_rss_feed_reader');
 		WPeMatico::add_wp_notice( array('text' => $notice , 'below-h2'=>false ) );
 	}
 }
