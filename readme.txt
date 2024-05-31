@@ -5,7 +5,7 @@ Tags: wpematico, rss reader, autoblog, rss, feed
 Requires PHP: 7.0
 Requires at least: 5.9
 Tested up to: 6.5.3
-Stable tag: 1.0
+Stable tag: 1.0.0
 License: GPLv2 or later.
 
 Add On for WPeMatico plugin. Adds a feature to print pre-formatted feeds contents directly on your pages, posts, widgets, etc. 
