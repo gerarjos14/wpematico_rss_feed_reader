@@ -11,7 +11,8 @@
  * @package         etruel\RSS Feed Reader
  * @author          Esteban Truelsegaard
  * @copyright       Copyright (c) 2024
- *
+ * 
+ * @Release	C2
  */
 
 
