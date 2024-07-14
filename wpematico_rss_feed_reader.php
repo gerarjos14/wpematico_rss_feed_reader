@@ -4,10 +4,12 @@
  * Plugin URI:      @todo
  * Description:     RSS Feed Reader Add-on allows to use WPeMatico from a Wordpress website.
  * Version:         1.0.0
- * Author: Etruel Developments LLC
- * Author URI: https://etruel.com/wpematico/
+ * Author:          Etruel Developments LLC
+ * Author URI:      https://etruel.com/wpematico/
  * Text Domain:     wpematico_rss_feed_reader
- *
+ * License:         GPL v2 or later
+ * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
+ * 
  * @package         etruel\RSS Feed Reader
  * @author          Esteban Truelsegaard
  * @copyright       Copyright (c) 2016
@@ -31,11 +33,6 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
      * @since       1.0.0
      */
     class WpeMatico_RSS_Feed_Reader{
-
-        public function __construct(){
-            //To add anything            
-        }
-
         /**
          * @var         WpeMatico_RSS_Feed_Reader $instance The one true RSS Feed Reader
          * @since       1.0.0
@@ -137,8 +134,8 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
             $lang_dir = apply_filters( 'rss_feed_reader_languages_directory', $lang_dir );
 
             // Traditional WordPress plugin locale filter
-            $locale = apply_filters( 'plugin_locale', get_locale(), 'rss_feed_reader' );
-            $mofile = sprintf( '%1$s-%2$s.mo', 'rss_feed_reader', $locale );
+            $locale = apply_filters( 'plugin_locale', get_locale(), 'wpematico_rss_feed_reader' );
+            $mofile = sprintf( '%1$s-%2$s.mo', 'wpematico_rss_feed_reader', $locale );
 
             // Setup paths to current locale file
             $mofile_local   = $lang_dir . $mofile;
@@ -146,13 +143,13 @@ if( !class_exists( 'WpeMatico_RSS_Feed_Reader' ) ) {
 
             if( file_exists( $mofile_global ) ) {
                 // Look in global /wp-content/languages/rss_feed_reader/ folder
-                load_textdomain( 'rss_feed_reader', $mofile_global );
+                load_textdomain( 'rss-feed-reader', $mofile_global );
             } elseif( file_exists( $mofile_local ) ) {
                 // Look in local /wp-content/plugins/rss_feed_reader/languages/ folder
-                load_textdomain( 'rss_feed_reader', $mofile_local );
+                load_textdomain( 'rss-feed-reader', $mofile_local );
             } else {
                 // Load the default language files
-                load_plugin_textdomain( 'rss_feed_reader', false, $lang_dir );
+                load_plugin_textdomain( 'rss-feed-reader', false, $lang_dir );
             }
         }
 
@@ -198,7 +195,7 @@ add_action( 'plugins_loaded', 'Wpematico_rss_feed_reader_load',999);
 function rss_feed_reader_activation() {
     /* Activation functions here */
 	if(class_exists('WPeMatico')) {
-		$notice= __('RSS Feed Reader Activated.', 'rss_feed_reader');
+		$notice= __('RSS Feed Reader Activated.', 'wpematico_rss_feed_reader');
 		WPeMatico::add_wp_notice( array('text' => $notice , 'below-h2'=>false ) );
 	}
 }
@@ -209,9 +206,9 @@ function wpematico_rss_requirements(){
     $checks = true;
     // Core is not updated, Rss feed reader too new to use. 
     if (class_exists('WPeMatico') && version_compare(WPEMATICO_VERSION, '2.7', '<')) {
-        $message .= sprintf(__('The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s', 'wpematico'), WPEMATICO_RSS_FEED_READER_VER, '2.7') . '<br />';
+        $message .= sprintf(__('The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s', 'wpematico_rss_feed_reader'), WPEMATICO_RSS_FEED_READER_VER, '2.7') . '<br />';
         $message .= sprintf(
-            __('Please %s to the last version ASAP to avoid errors.', 'wpematico'),
+            __('Please %s to the last version ASAP to avoid errors.', 'wpematico_rss_feed_reader'),
             ' <a href="' . admin_url('plugins.php') . '#wpematico">update "WPeMatico"</a>'
         );
 
