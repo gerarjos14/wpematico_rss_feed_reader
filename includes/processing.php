@@ -69,7 +69,7 @@ class Wpematico_feed_reader_process {
 		if($campaign_id){
 			//start the process to change the template to a feed
 			$template = str_replace('~~~BeginItemsRecord~~~', '', $template);
-			$template = str_replace('~~~ItemPubShortDate~~~', empty($item['date']) ? date('d-m-Y') : $item['date'], $template);
+			$template = str_replace('~~~ItemPubShortDate~~~', empty($item['date']) ? date_i18n('d-m-Y') : $item['date'], $template);
 			$template = str_replace('~~~ItemPubShortTime~~~', strtotime('now') , $template);
 			$template = str_replace('~~~ItemDescription~~~', $item['content'], $template);
 			$template = str_replace('~~~ItemLink~~~', $item['permalink'], $template);

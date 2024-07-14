@@ -1,12 +1,14 @@
-=== RSS Feed Reader ===
+=== WPeMatico RSS Feed Reader ===
 Contributors: etruel, khaztiel, gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B8V39NWK3NFQU
-Tags: wpematico, RSS Feed Reader, autoblog, rss, feed, read, matic
-Requires at least: 6.4
+Tags: wpematico, rss reader, autoblog, rss, feed
+Requires PHP: 7.0
+Requires at least: 5.9
 Tested up to: 6.5.3
-Stable tag: 1.0
+Stable tag: 1.0.0
+License: GPLv2 or later.
 
-Add On for WPeMatico plugin. Adds a feature to 
+Add On for WPeMatico plugin. Adds a feature to print pre-formatted feeds contents directly on your pages, posts, widgets, etc. 
 
 == Description ==
 The RSS Feed Reader addon further enhances the functionality of WPeMatico by allowing to read and display the RSS feed results using shortcodes, page templates or the get_the_content function on your WordPress site without creating the posts.
@@ -67,3 +69,6 @@ No. Plugin requires WPeMatico Free Version installed and activated.
 
 = 1.0 =
 * First release
+
+== Upgrade Notice ==
+* Initial version
