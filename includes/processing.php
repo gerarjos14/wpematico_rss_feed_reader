@@ -13,10 +13,10 @@ class Wpematico_feed_reader_process {
 	
 	function __construct() {
 		add_action('wpematico_allow_insertpost', array(__CLASS__, 'allow_insertpost'), 10, 3); //hook to add actions and filter on init fetching
-		add_filter('wpematico_custom_simplepie', array(__CLASS__,'rss_feed_reader_process'), 10, 4);
+		add_filter('wpematico_custom_simplepie', array(__CLASS__,'wpematico_rss_feed_reader_process'), 10, 4);
 	}
 
-	public static function rss_feed_reader_process($simplepie, $class, $feed, $kf){
+	public static function wpematico_rss_feed_reader_process($simplepie, $class, $feed, $kf){
 		
 		if ($class->campaign['campaign_type'] == 'rss_reader') {
 
@@ -48,7 +48,7 @@ class Wpematico_feed_reader_process {
 		if ($campaign['campaign_type'] == 'rss_reader' ) {
 			$campaign_rss_html_content = $campaign['campaign_rss_html_content'];
 			$campaign_id = $campaign['ID'];
-			if (self::set_rss_data($campaign_id, $current_item, $campaign_rss_html_content)) {
+			if (self::wpematico_set_rss_data($campaign_id, $current_item, $campaign_rss_html_content)) {
 				$allow = false;
 				// get all posts
 				$all_posts = get_post_meta($campaign_id, 'feed_items');
@@ -64,7 +64,7 @@ class Wpematico_feed_reader_process {
 		return $allow;
 	}
 
-	public static function set_rss_data($campaign_id, $item, $template = ''){
+	public static function wpematico_set_rss_data($campaign_id, $item, $template = ''){
 
 		if($campaign_id){
 			//start the process to change the template to a feed

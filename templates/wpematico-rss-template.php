@@ -3,7 +3,11 @@
  * Template Name: Feed Reader Template
  * Description: WPeMatico RSS Feed Reader default template.
  */
-  if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+if ( !defined('ABSPATH') ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit();
+}
 
   if (file_exists(get_stylesheet_directory() . '/header.php')) {
     get_header();

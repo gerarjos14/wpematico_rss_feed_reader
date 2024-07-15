@@ -42,13 +42,17 @@ class Wpematico_feed_reader_edit
 	
 	public static function campaign_type_options($options)
 	{
-		$options[] = array('value' => 'rss_reader', 'text' => __('RSS Feed Reader', 'wpematico_rss_feed_reader'), "show" => array('feeds-box', 'rss-page-feed-url-save'), 'hide' => array(
-			//WPeMatico boxes
-			'audios-box','videos-box','cron-box','template-box',
-			//Full Content box 
-			'fullcontent-box',
-			//Synchronizer
-			'wpe-sync-data'
+		$options[] = array(
+			'value' => 'rss_reader',
+			'text' => __('RSS Feed Reader', 'wpematico_rss_feed_reader'),
+			'show' => array('feeds-box', 'wpematico-rss-page-feed-url-save'),
+			'hide' => array(
+				//WPeMatico boxes
+				'audios-box','videos-box','cron-box','template-box',
+				//Full Content box 
+				'fullcontent-box',
+				//Synchronizer
+				'wpe-sync-data'
 			));
 
 		return $options;
@@ -63,7 +67,7 @@ class Wpematico_feed_reader_edit
 		global $pagenow, $post;
 		if (!(($pagenow == 'post.php' || $pagenow == 'post-new.php') && $post->post_type == 'wpematico')) return false;
 
-		add_meta_box('rss-page-feed-url-save', '<span class="dashicons dashicons-list-view"></span> '.__('RSS Contents', 'wpematico_rss_feed_reader'), array(__CLASS__, 'wpematico_rss_feed_reader_box'), 'wpematico_rss_feed_reader', 'normal', 'default');
+		add_meta_box('wpematico-rss-page-feed-url-save', '<span class="dashicons dashicons-list-view"></span> '.__('RSS Contents', 'wpematico_rss_feed_reader'), array(__CLASS__, 'wpematico_rss_feed_reader_box'), 'wpematico', 'normal', 'default');
 	}
 
 	public static function admin_styles()
