@@ -5,7 +5,7 @@ if ( !defined('ABSPATH') ) {
 	exit();
 }
 
-add_action('admin_init', 'rss_feed_reader_admin_init');
+add_action('admin_init', 'wpematico_rss_feed_reader_admin_init');
 function wpematico_rss_feed_reader_admin_init(){
 	add_filter(	'plugin_row_meta',	'wpematico_rss_feed_reader_init_row_meta',10,2);
 	add_filter(	'plugin_action_links_' . plugin_basename( WPEMATICO_RSS_FEED_READER_ROOT_FILE ), 'wpematico_rss_feed_reader_init_action_links');
