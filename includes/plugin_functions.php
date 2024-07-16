@@ -42,7 +42,7 @@ function wpematico_rss_feed_reader_init_action_links($data)	{
 	return array_merge(
 		$data,
 		array(
-			'<a href="'.  admin_url('edit.php?post_type=wpematico&page=wpematico_settings&tab=rss_feed_reader').'" title="' . esc_htmlesc_html__('Go to RSS Feed Reader Settings Page', 'wpematico_rss_feed_reader') . '">' . esc_htmlesc_html__('Settings', 'wpematico_rss_feed_reader') . '</a>',
+			'<a href="'.  admin_url('edit.php?post_type=wpematico&page=wpematico_settings&tab=rss_feed_reader').'" title="' . esc_html__('Go to RSS Feed Reader Settings Page', 'wpematico_rss_feed_reader') . '">' . esc_html__('Settings', 'wpematico_rss_feed_reader') . '</a>',
 		)
 	);
 }
