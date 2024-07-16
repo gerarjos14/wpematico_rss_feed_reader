@@ -114,14 +114,14 @@ class wpematico_rss_feed_functions {
 	}
 
 	public static function wpematico_add_custom_template($templates){
-		$templates[WPEMATICO_RSS_FEED_READER_DIR . 'templates/wpematico-rss-template.php'] = __('Feed reader template', 'wpematico_rss_feed_reader');
+		$templates[WPEMATICO_RSS_FEED_READER_DIR . 'templates/wpematico-rss-template.php'] = esc_html__('Feed reader template', 'wpematico_rss_feed_reader');
 
 		return $templates;
 	}
 
 	public static function wpematico_reset_campaign($status = '') {
 		if (!( isset($_GET['post']) || isset($_POST['post']) || ( isset($_REQUEST['action']) && 'wpematico_reset_campaign' == $_REQUEST['action'] ) )) {
-			wp_die(__('No campaign ID has been supplied!', 'wpematico_rss_feed_reader'));
+			wp_die(esc_html__('No campaign ID has been supplied!', 'wpematico_rss_feed_reader'));
 		}
 		$nonce = '';
 		if (isset($_REQUEST['nonce'])) {

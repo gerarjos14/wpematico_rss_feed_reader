@@ -44,7 +44,7 @@ class Wpematico_feed_reader_edit
 	{
 		$options[] = array(
 			'value' => 'rss_reader',
-			'text' => __('RSS Feed Reader', 'wpematico_rss_feed_reader'),
+			'text' => esc_html__('RSS Feed Reader', 'wpematico_rss_feed_reader'),
 			'show' => array('feeds-box', 'wpematico-rss-page-feed-url-save'),
 			'hide' => array(
 				//WPeMatico boxes
@@ -67,7 +67,7 @@ class Wpematico_feed_reader_edit
 		global $pagenow, $post;
 		if (!(($pagenow == 'post.php' || $pagenow == 'post-new.php') && $post->post_type == 'wpematico')) return false;
 
-		add_meta_box('wpematico-rss-page-feed-url-save', '<span class="dashicons dashicons-list-view"></span> '.__('RSS Contents', 'wpematico_rss_feed_reader'), array(__CLASS__, 'wpematico_rss_feed_reader_box'), 'wpematico', 'normal', 'default');
+		add_meta_box('wpematico-rss-page-feed-url-save', '<span class="dashicons dashicons-list-view"></span> '.esc_html__('RSS Contents', 'wpematico_rss_feed_reader'), array(__CLASS__, 'wpematico_rss_feed_reader_box'), 'wpematico', 'normal', 'default');
 	}
 
 	public static function admin_styles()
@@ -87,7 +87,7 @@ class Wpematico_feed_reader_edit
 
 		wp_enqueue_script('wpematico_rss_feed_reader_campaign_edit', WPEMATICO_RSS_FEED_READER_URL . 'assets/js/campaign_edit.js', array('jquery'), WPEMATICO_RSS_FEED_READER_VER, true);
 
-		wp_localize_script('wpematico_rss_feed_reader_campaign_edit', 'backend_object_rss', array('error_message' => __('Max to fetch items value must be equal to the max to show items.', 'wpematico_rss_feed_reader')));
+		wp_localize_script('wpematico_rss_feed_reader_campaign_edit', 'backend_object_rss', array('error_message' => esc_html__('Max to fetch items value must be equal to the max to show items.', 'wpematico_rss_feed_reader')));
 	}
 
 	public static function wpematico_rss_feed_reader_box()
