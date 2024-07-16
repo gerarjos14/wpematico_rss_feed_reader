@@ -62,11 +62,6 @@ class Wpematico_feed_reader_edit {
 		add_meta_box('wpematico-rss-page-feed-url-save', '<span class="dashicons dashicons-list-view"></span> '.esc_html__('RSS Contents', 'wpematico_rss_feed_reader'), array(__CLASS__, 'wpematico_rss_feed_reader_box'), 'wpematico', 'normal', 'default');
 	}
 
-	public static function admin_styles()
-	{ // load javascript 
-		add_meta_box('rss-page-feed-url-save', '<span class="dashicons dashicons-list-view"></span> ' . __('RSS Contents', 'wpematico_rss_feed_reader'), array(__CLASS__, 'wpematico_rss_feed_reader_box'), 'wpematico', 'normal', 'default');
-	}
-
 	public static function admin_styles() { // load javascript 
 		global $post;
 
