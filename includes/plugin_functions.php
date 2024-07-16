@@ -62,9 +62,9 @@ function wpematico_rss_feed_reader_init_row_meta($data, $page)	{
 	return array_merge(
 		$data,
 		array(
-		'<a href="https://etruel.com/" target="_blank">' . esc_htmlesc_html__('etruel Store') . '</a>',
+		'<a href="https://etruel.com/" target="_blank">' . esc_html('etruel Store') . '</a>',
 		'<a href="https://etruel.com/my-account/support/" target="_blank">' . esc_html__('Support') . '</a>',
-		'<a href="https://wordpress.org/support/view/plugin-reviews/wpematico?filter=5&rate=5#postform" target="_Blank" title="Rate 5 stars on Wordpress.org">' . esc_htmlesc_html__('Rate Plugin' ) . '</a>'
+		'<a href="https://wordpress.org/support/view/plugin-reviews/wpematico?filter=5&rate=5#postform" target="_Blank" title="Rate 5 stars on Wordpress.org">' . esc_html('Rate Plugin' ) . '</a>'
 		)
 	);
 }	
