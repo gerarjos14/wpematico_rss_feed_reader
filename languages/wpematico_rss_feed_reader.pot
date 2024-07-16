@@ -1,0 +1,201 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WPeMatico RSS Feed Reader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-16 15:22-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Loco-Version: 2.6.11; wp-6.5.5\n"
+"X-Domain: wpematico_rss_feed_reader\n"
+
+#: includes/class.extension-activation.php:87
+msgid "activate it"
+msgstr ""
+
+#: includes/campaign_help.php:20
+msgid ""
+"Allows to choose the Post Type where the feed content will be displayed. For "
+"example, if you select \"Page\", \"Post\" or another CPT, you will need to "
+"select the specific post where the content will be displayed using the "
+"WordPress <code>get_the_content()</code> function."
+msgstr ""
+
+#: includes/campaign_help.php:35
+msgid ""
+"Allows to customize the HTML structure where the feed items will be "
+"displayed, adjust the layout, styles and visual components to perfectly fit "
+"your site, but be careful not to delete the variables that store each "
+"content."
+msgstr ""
+
+#. Author of the plugin
+msgid "Etruel Developments LLC"
+msgstr ""
+
+#: includes/campaign_help.php:25
+msgid ""
+"Exclusive for Pages, allows to select a previously created page and also its "
+"page template to display the feed content, you will be able to choose the "
+"default template of the plugin or theme templates."
+msgstr ""
+
+#: includes/functions.php:117
+msgid "Feed reader template"
+msgstr ""
+
+#: includes/campaign_help.php:30
+msgid ""
+"Generate a shortcode using the campaign slug. This shortcode can be inserted "
+"on your website to display the content of the feed configured in the "
+"campaign, you can modify the shortcode by editing the campaign slug."
+msgstr ""
+
+#: includes/campaign_edit.php:118
+msgid ""
+"Generates a shortcode that can be used in any place of the website to "
+"display the feed content."
+msgstr ""
+
+#: includes/plugin_functions.php:45
+msgid "Go to RSS Feed Reader Settings Page"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://etruel.com/"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://etruel.com/downloads/wpematico-rss-feed-reader/"
+msgstr ""
+
+#: includes/class.extension-activation.php:90
+msgid "install it"
+msgstr ""
+
+#: includes/campaign_edit.php:106
+msgid "Max items to show in each read feed."
+msgstr ""
+
+#: includes/campaign_help.php:15
+msgid "Max items to show."
+msgstr ""
+
+#: includes/campaign_edit.php:90
+msgid "Max to fetch items value must be equal to the max to show items."
+msgstr ""
+
+#: includes/campaign_help.php:16
+msgid ""
+"Maximum items to be shown in each displayed feed: allows to set a limit on "
+"how many feed items will be shown in the selected post type, regardless of "
+"the method you have chosen. Also, make sure that this value is not less than "
+"the \"Max items to create on each fetch\" field which controls the items to "
+"be processed during the campaign execution."
+msgstr ""
+
+#: includes/functions.php:124
+msgid "No campaign ID has been supplied!"
+msgstr ""
+
+#: wpematico_rss_feed_reader.php:191
+#, php-format
+msgid "Please %s to the last version ASAP to avoid errors."
+msgstr ""
+
+#: includes/campaign_edit.php:70
+msgid "RSS Contents"
+msgstr ""
+
+#: includes/campaign_edit.php:47
+msgid "RSS Feed Reader"
+msgstr ""
+
+#: includes/plugin_functions.php:18
+msgid "RSS Feed Reader DEACTIVATED."
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"RSS Feed Reader print pre-formatted feeds contents directly on your pages, "
+"posts, widgets, etc."
+msgstr ""
+
+#: includes/campaign_edit.php:114 includes/campaign_help.php:24
+msgid "RSS Page Template."
+msgstr ""
+
+#: includes/campaign_edit.php:107
+msgid ""
+"Set a limit on how many feed items will be displayed, make sure this value "
+"is not less than the value of \"Max items to create on each fetch\"."
+msgstr ""
+
+#: includes/plugin_functions.php:45
+msgid "Settings"
+msgstr ""
+
+#: includes/campaign_edit.php:116
+msgid "Shortcode"
+msgstr ""
+
+#: includes/campaign_edit.php:121
+msgid "Template feed"
+msgstr ""
+
+#: includes/campaign_help.php:34
+msgid "Template feed."
+msgstr ""
+
+#: wpematico_rss_feed_reader.php:189
+#, php-format
+msgid "The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s"
+msgstr ""
+
+#: includes/class.extension-activation.php:50
+msgid "This plugin"
+msgstr ""
+
+#: includes/campaign_help.php:19
+msgid "Use <code>get_the_content</code> WordPress Filter."
+msgstr ""
+
+#: includes/campaign_help.php:29
+msgid "Use Shortcode."
+msgstr ""
+
+#: includes/campaign_edit.php:112
+msgid ""
+"Use the WordPress function \"get_the_content()\" to display the content of "
+"the feed in the selected post type."
+msgstr ""
+
+#: includes/campaign_edit.php:111
+msgid "Wordpress filter"
+msgstr ""
+
+#: includes/campaign_edit.php:115
+msgid ""
+"Works only with \"pages\" you must choose the page and page template where "
+"the feed content will be displayed."
+msgstr ""
+
+#. Name of the plugin
+msgid "WPeMatico RSS Feed Reader"
+msgstr ""
+
+#: wpematico_rss_feed_reader.php:178
+msgid "WPeMatico RSS Feed Reader Activated."
+msgstr ""
+
+#: includes/campaign_edit.php:122
+msgid ""
+"You can customise the HTML structure where the feed elements will be "
+"displayed."
+msgstr ""
