@@ -43,7 +43,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 1. Click Plugins
 2. Click Add New
-3. Search for `wpematico-rss-feed-reader`
+3. Search for `wpematico_rss_feed_reader`
 4. Click Install
 5. Click Install Now
 6. Click Activate Plugin
@@ -51,7 +51,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 = Manually =
 
-1. Upload `wpematico-rss-feed-reader` folder to the `/wp-content/plugins/` directory
+1. Upload `wpematico_rss_feed_reader` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin from the WPeMatico Extensions menu.
 
 == Screenshots ==

@@ -7,7 +7,9 @@
  * Author:			Etruel Developments LLC
  * Author URI:		https://etruel.com/
  * Text Domain:     wpematico_rss_feed_reader
- *
+ * License:         GPL v2 or later
+ * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
+ * 
  * @package         etruel\RSS Feed Reader
  * @author          Esteban Truelsegaard
  * @copyright       Copyright (c) 2024
@@ -31,12 +33,7 @@ if( !class_exists( 'WPeMatico_RSS_Feed_Reader' ) ) {
      *
      * @since       1.0.0
      */
-    class WPeMatico_RSS_Feed_Reader{
-
-        public function __construct(){
-            //To add anything            
-        }
-
+    class WpeMatico_RSS_Feed_Reader{
         /**
          * @var         WPeMatico_RSS_Feed_Reader $instance The one true RSS Feed Reader
          * @since       1.0.0
@@ -176,23 +173,23 @@ add_action( 'plugins_loaded', 'WPematico_rss_feed_reader_load',999);
  * @since       1.0.0
  * @return      void
  */
-function rss_feed_reader_activation() {
+function wpematico_rss_feed_reader_activation() {
     /* Activation functions here */
 	if(class_exists('WPeMatico')) {
-		$notice= __('WPeMatico RSS Feed Reader Activated.', 'wpematico_rss_feed_reader');
+		$notice= esc_html__('WPeMatico RSS Feed Reader Activated.', 'wpematico_rss_feed_reader');
 		WPeMatico::add_wp_notice( array('text' => $notice , 'below-h2'=>false ) );
 	}
 }
-register_activation_hook( __FILE__, 'rss_feed_reader_activation' );
+register_activation_hook( __FILE__, 'wpematico_rss_feed_reader_activation' );
 
 function wpematico_rss_requirements(){
     $message = $wperss_admin_message = '';
     $checks = true;
     // Core is old. 
     if (class_exists('WPeMatico') && version_compare(WPEMATICO_VERSION, '2.7', '<')) {
-        $message .= sprintf(__('The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s', 'wpematico'), WPEMATICO_RSS_FEED_READER_VER, '2.7') . '<br />';
+        $message .= sprintf(esc_html__('The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s', 'wpematico_rss_feed_reader'), WPEMATICO_RSS_FEED_READER_VER, '2.7') . '<br />';
         $message .= sprintf(
-            __('Please %s to the last version ASAP to avoid errors.', 'wpematico'),
+            esc_html__('Please %s to the last version ASAP to avoid errors.', 'wpematico_rss_feed_reader'),
             ' <a href="' . admin_url('plugins.php') . '#wpematico">update "WPeMatico"</a>'
         );
         $checks = false;
