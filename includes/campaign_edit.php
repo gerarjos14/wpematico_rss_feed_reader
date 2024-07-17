@@ -40,7 +40,7 @@ class Wpematico_feed_reader_edit {
 	{
 		$options[] = array(
 			'value' => 'rss_reader',
-			'text' => esc_html__('RSS Feed Reader', 'wpematico_rss_feed_reader'),
+			'text' => esc_html__('RSS Feed Reader', 'wpematico-rss-feed-reader'),
 			'show' => array('feeds-box', 'wpematico-rss-page-feed-url-save'),
 			'hide' => array(
 				//WPeMatico boxes
@@ -59,7 +59,7 @@ class Wpematico_feed_reader_edit {
 		if (!(($pagenow == 'post.php' || $pagenow == 'post-new.php') && $post->post_type == 'wpematico'))
 			return false;
 
-		add_meta_box('wpematico-rss-page-feed-url-save', '<span class="dashicons dashicons-list-view"></span> '.esc_html__('RSS Contents', 'wpematico_rss_feed_reader'), array(__CLASS__, 'wpematico_rss_feed_reader_box'), 'wpematico', 'normal', 'default');
+		add_meta_box('wpematico-rss-page-feed-url-save', '<span class="dashicons dashicons-list-view"></span> '.esc_html__('RSS Contents', 'wpematico-rss-feed-reader'), array(__CLASS__, 'wpematico_rss_feed_reader_box'), 'wpematico', 'normal', 'default');
 	}
 
 	public static function admin_styles() { // load javascript 
@@ -79,7 +79,7 @@ class Wpematico_feed_reader_edit {
 
 		wp_enqueue_script('wpematico_rss_feed_reader_campaign_edit', WPEMATICO_RSS_FEED_READER_URL . 'assets/js/campaign_edit.js', array('jquery'), WPEMATICO_RSS_FEED_READER_VER, true);
 
-		wp_localize_script('wpematico_rss_feed_reader_campaign_edit', 'backend_object_rss', array('error_message' => esc_html__('Max to fetch items value must be equal to the max to show items.', 'wpematico_rss_feed_reader')));
+		wp_localize_script('wpematico_rss_feed_reader_campaign_edit', 'backend_object_rss', array('error_message' => esc_html__('Max to fetch items value must be equal to the max to show items.', 'wpematico-rss-feed-reader')));
 	}
 
 	public static function wpematico_rss_feed_reader_box() {
@@ -92,23 +92,23 @@ class Wpematico_feed_reader_edit {
 		?>
 		<div class="wpe_rss-max-items">
 			<input name="campaign_max_to_show" type="number" min="0" size="3" value="<?php echo $campaign_max_to_show; ?>" class="small-text" id="campaign_max_to_show" />
-			<label for="campaign_max_to_show"><?php esc_html_e('Max items to show in each read feed.', 'wpematico_rss_feed_reader'); ?></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['max_to_show']; ?>"></span><br />
-			<p class="description"><?php esc_html_e('Set a limit on how many feed items will be displayed, make sure this value is not less than the value of "Max items to create on each fetch".', 'wpematico_rss_feed_reader'); ?></p>
+			<label for="campaign_max_to_show"><?php esc_html_e('Max items to show in each read feed.', 'wpematico-rss-feed-reader'); ?></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['max_to_show']; ?>"></span><br />
+			<p class="description"><?php esc_html_e('Set a limit on how many feed items will be displayed, make sure this value is not less than the value of "Max items to create on each fetch".', 'wpematico-rss-feed-reader'); ?></p>
 		</div>
 		<div class="wpe_rss-display">
-			<p><b><?php esc_html_e('How to display the feed content:',  'rss_feed_reader') ?></b></p>
-			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('the_content', $campaign_rss_feed_reader, false); ?> value="the_content" /> <span class="wpe_rss_code">get_the_content()</span> <?php esc_html_e('Wordpress filter', 'wpematico_rss_feed_reader'); ?></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['get_the_content']; ?>"></span><br />
-			<p class="description"><?php esc_html_e('Use the WordPress function "get_the_content()" to display the content of the feed in the selected post type.', 'wpematico_rss_feed_reader'); ?></p>
+			<p><b><?php esc_html_e('How to display the feed content:',  'wpematico-rss-feed-reader') ?></b></p>
+			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('the_content', $campaign_rss_feed_reader, false); ?> value="the_content" /> <span class="wpe_rss_code">get_the_content()</span> <?php esc_html_e('Wordpress filter', 'wpematico-rss-feed-reader'); ?></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['get_the_content']; ?>"></span><br />
+			<p class="description"><?php esc_html_e('Use the WordPress function "get_the_content()" to display the content of the feed in the selected post type.', 'wpematico-rss-feed-reader'); ?></p>
 			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('page_template', $campaign_rss_feed_reader, false); ?> value="page_template" />
-			<?php esc_html_e('RSS Page Template.', 'wpematico_rss_feed_reader'); ?></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['rss_page_template']; ?>"></span><br />
-			<p class="description"><?php esc_html_e('Works only with "pages" you must choose the page and page template where the feed content will be displayed.', 'wpematico_rss_feed_reader'); ?></p>
-			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('shortcode', $campaign_rss_feed_reader, false); ?> value="shortcode" /> <span class="wpe_rss_code"><?php echo "[wpematico-$post->post_name]" ?></span> <?php esc_html_e('Shortcode', 'wpematico_rss_feed_reader'); ?></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['shortcode']; ?>"></span><br />
+			<?php esc_html_e('RSS Page Template.', 'wpematico-rss-feed-reader'); ?></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['rss_page_template']; ?>"></span><br />
+			<p class="description"><?php esc_html_e('Works only with "pages" you must choose the page and page template where the feed content will be displayed.', 'wpematico-rss-feed-reader'); ?></p>
+			<label><input type="radio" name="campaign_rss_feed_reader" <?php echo checked('shortcode', $campaign_rss_feed_reader, false); ?> value="shortcode" /> <span class="wpe_rss_code"><?php echo "[wpematico-$post->post_name]" ?></span> <?php esc_html_e('Shortcode', 'wpematico-rss-feed-reader'); ?></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['shortcode']; ?>"></span><br />
 			<input type="hidden" name="wpematico_shortcode_name" value="<?php echo "$post->post_name" ?>">
-			<p class="description"><?php esc_html_e('Generates a shortcode that can be used in any place of the website to display the feed content.', 'wpematico_rss_feed_reader'); ?></p>
+			<p class="description"><?php esc_html_e('Generates a shortcode that can be used in any place of the website to display the feed content.', 'wpematico-rss-feed-reader'); ?></p>
 		</div>
 		<div class="wpe_rss-template">
-			<p><label for="campaign_rss_html_content"><b><?php esc_html_e('Template feed', 'wpematico_rss_feed_reader') ?></b></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['rss_page_template_html']; ?>"></span></p>
-			<p class="description"><?php esc_html_e('You can customise the HTML structure where the feed elements will be displayed.', 'wpematico_rss_feed_reader'); ?></p>
+			<p><label for="campaign_rss_html_content"><b><?php esc_html_e('Template feed', 'wpematico-rss-feed-reader') ?></b></label><span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip['rss_page_template_html']; ?>"></span></p>
+			<p class="description"><?php esc_html_e('You can customise the HTML structure where the feed elements will be displayed.', 'wpematico-rss-feed-reader'); ?></p>
 			<textarea id="campaign_rss_html_content" name="campaign_rss_html_content" rows="10" cols="100"><?php echo htmlspecialchars($campaign_rss_html_content); ?></textarea>
 		</div>
 		<?php

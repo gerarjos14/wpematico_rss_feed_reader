@@ -15,7 +15,7 @@ function wpematico_rss_feed_reader_admin_init(){
 register_deactivation_hook( plugin_basename( WPEMATICO_RSS_FEED_READER_ROOT_FILE ), 'wpematico_rss_feed_reader_deactivate' );
 function wpematico_rss_feed_reader_deactivate() {
 	if(class_exists('WPeMatico')) {
-		$notice = esc_html__('RSS Feed Reader DEACTIVATED.',  'wpematico_rss_feed_reader');
+		$notice = esc_html__('RSS Feed Reader DEACTIVATED.',  'wpematico-rss-feed-reader');
 		WPeMatico::add_wp_notice( array('text' => $notice , 'below-h2'=>false ) );
 	}
 }
@@ -42,7 +42,7 @@ function wpematico_rss_feed_reader_init_action_links($data)	{
 	return array_merge(
 		$data,
 		array(
-			'<a href="'.  admin_url('edit.php?post_type=wpematico&page=wpematico_settings&tab=rss_feed_reader').'" title="' . esc_html__('Go to RSS Feed Reader Settings Page', 'wpematico_rss_feed_reader') . '">' . esc_html__('Settings', 'wpematico_rss_feed_reader') . '</a>',
+			'<a href="'.  admin_url('edit.php?post_type=wpematico&page=wpematico_settings&tab=rss_feed_reader').'" title="' . esc_html__('Go to RSS Feed Reader Settings Page', 'wpematico-rss-feed-reader') . '">' . esc_html__('Settings', 'wpematico-rss-feed-reader') . '</a>',
 		)
 	);
 }

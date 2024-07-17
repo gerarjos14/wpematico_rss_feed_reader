@@ -131,7 +131,7 @@ if( !class_exists( 'WPeMatico_RSS_Feed_Reader' ) ) {
          */
          public static function load_textdomain() {
             $lang_dir = WPEMATICO_RSS_FEED_READER_DIR . '/languages/';
-            load_plugin_textdomain( 'wpematico_rss_feed_reader', false, $lang_dir );
+            load_plugin_textdomain( 'wpematico-rss-feed-reader', false, $lang_dir );
         }
 
 } // End if class_exists check
@@ -176,7 +176,7 @@ add_action( 'plugins_loaded', 'WPematico_rss_feed_reader_load',999);
 function wpematico_rss_feed_reader_activation() {
     /* Activation functions here */
 	if(class_exists('WPeMatico')) {
-		$notice= esc_html__('WPeMatico RSS Feed Reader Activated.', 'wpematico_rss_feed_reader');
+		$notice= esc_html__('WPeMatico RSS Feed Reader Activated.', 'wpematico-rss-feed-reader');
 		WPeMatico::add_wp_notice( array('text' => $notice , 'below-h2'=>false ) );
 	}
 }
@@ -187,9 +187,9 @@ function wpematico_rss_requirements(){
     $checks = true;
     // Core is old. 
     if (class_exists('WPeMatico') && version_compare(WPEMATICO_VERSION, '2.7', '<')) {
-        $message .= sprintf(esc_html__('The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s', 'wpematico_rss_feed_reader'), WPEMATICO_RSS_FEED_READER_VER, '2.7') . '<br />';
+        $message .= sprintf(esc_html__('The current version WPeMatico RSS Feed Reader %s needs WPeMatico %s', 'wpematico-rss-feed-reader'), WPEMATICO_RSS_FEED_READER_VER, '2.7') . '<br />';
         $message .= sprintf(
-            esc_html__('Please %s to the last version ASAP to avoid errors.', 'wpematico_rss_feed_reader'),
+            esc_html__('Please %s to the last version ASAP to avoid errors.', 'wpematico-rss-feed-reader'),
             ' <a href="' . admin_url('plugins.php') . '#wpematico">update "WPeMatico"</a>'
         );
         $checks = false;
