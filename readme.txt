@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: wpematico, rss reader, autoblog, rss, feed
 Requires PHP: 7.0
 Requires at least: 5.9
-Tested up to: 6.5.3
+Tested up to: 6.6
 Stable tag: 1.0.0
 License: GPLv2 or later.
 
