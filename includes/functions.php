@@ -114,7 +114,7 @@ class wpematico_rss_feed_functions {
 	}
 
 	public static function wpematico_add_custom_template($templates){
-		$templates[WPEMATICO_RSS_FEED_READER_DIR . 'templates/wpematico-rss-template.php'] = esc_html__('Feed reader template', 'wpematico_rss_feed_reader');
+		$templates[WPEMATICO_RSS_FEED_READER_DIR . 'templates/wpematico-rss-template.php'] = esc_html__('Feed reader template', 'wpematico-rss-feed-reader');
 
 		return $templates;
 	}
