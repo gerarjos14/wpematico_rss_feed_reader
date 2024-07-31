@@ -85,11 +85,13 @@ jQuery(document).ready(function ($) {
         }
     });
     $('#campaign_max_to_show , #campaign_max').on('blur', function (){
-        if( $('#campaign_max_to_show').val() !==  $('#campaign_max').val()){
-            $('#fieldserror').remove();
-					$("#poststuff").prepend('<div id="fieldserror" class="error fade">ERROR: ' + backend_object_rss.error_message + '</div>');
-        }else{
-            $('#fieldserror').remove();
+        if ($('#campaign_type').val() == 'rss_reader') {
+            if ($('#campaign_max_to_show').val() !== $('#campaign_max').val()) {
+                $('#fieldserror').remove();
+                $("#poststuff").prepend('<div id="fieldserror" class="error fade">ERROR: ' + backend_object_rss.error_message + '</div>');
+            } else {
+                $('#fieldserror').remove();
+            }
         }
     });
 });
